@@ -1,0 +1,19 @@
+#!/bin/bash -l
+#SBATCH --job-name="job_ex3_mpi"
+#SBATCH --account=uzh8
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=david.linder@uzh.ch
+#SBATCH --time=0:05:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-core=1
+#SBATCH --ntasks-per-node=36
+#SBATCH --cpus-per-task=1
+#SBATCH --partition=debug
+#SBATCH --constraint=mc
+#SBATCH --hint=nomultithread
+#SBATCH --output=output_mpi.log
+#SBATCH --error=error_mpi.log
+
+export mpi_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+srun cpi_mpi
