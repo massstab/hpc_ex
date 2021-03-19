@@ -38,3 +38,5 @@ I inserted the #pragma line right before the for loop. I #included the omp.h fil
 Unfortunately the sbatch command gave me the error: "project "uzh8" has exceeded the maximum allowable usage" so i couldn't run my script in parallel.
 
 Now I could run the parallel version: I tried to name all the files properly. I didn't put the different programs into folders. The makefile can compile all the c files with the make all_ command. Maybe when I have time, I will plot the speedup and make the bonus exercise.
+
+test_pw_ssh
