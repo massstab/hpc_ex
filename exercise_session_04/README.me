@@ -1,0 +1,36 @@
+Ex1:
+
+On my $HOME filder I have read write and execute permission:
+dlinder@daint106:~> ls -ld ~
+drwx------ 13 dlinder uzh8 8192 19. Mär 13:03 /users/dlinder
+
+On the $SCRATCH I have also rwx. Group and others has no write permission:
+dlinder@daint106:~> ls -ld $SCRATCH
+drwxr-xr-x 3 dlinder uzh8 4096 16. Mär 21:20 /scratch/snx3000/dlinder
+
+So this are the default permissions for a newfile:
+dlinder@daint106:~> touch newfile
+dlinder@daint106:~> ls -l newfile 
+-rw-r--r-- 1 dlinder uzh8 0 19. Mär 13:30 newfile
+
+This are the permissions of /users/hlascomb
+dlinder@daint106:~> ls -ld /users/hlascomb
+drwxr-x---+ 27 hlascomb uzh4 8192 19. Mär 13:29 /users/hlascomb
+
+I could not open the file because I'am not the owner or in that group. Maybe I would be able to write such an exam, but then I wouldn't have the permission to save it in user hlascombs directory.
+
+If we created the directory only rw permissions have to be removed:
+chmod og-rx dirname/
+In general we could use:
+chmod u+rwx,g-rwx,o-rwx dirname/
+or with the binary standard:
+chmod 700 dirname/
+
+I'm a bit afraid to do that! Is it lost??
+
+
+Ex2:
+I did as you told
+
+Ex3:
+I run the command time ./isprime.ch on both primes but the execution time was about the same for both: 0.008s.
