@@ -7,6 +7,8 @@ int main(int argc, char** argv) {
 
     // Get the number of processes and rank of the process
     int size, my_rank, tag=0;
+
+    MPI_Request request;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
@@ -35,18 +37,11 @@ int main(int argc, char** argv) {
     // Loop over the number of processes
     for (int i = 0; i < size; ++i)
     {
-        if (my_rank % 2 == 0)
-        {
     //     send to right, receive from left
-        MPI_Ssend(&send_rank, 1,MPI_INTEGER,right_rank,tag,MPI_COMM_WORLD);
-        MPI_Recv(&recv_rank, 1,MPI_INTEGER,left_rank,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        }
-        if (my_rank % 2 == 1)
-        {
-    //     send to right, receive from left
-        MPI_Recv(&recv_rank, 1,MPI_INTEGER,left_rank,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        MPI_Ssend(&send_rank, 1,MPI_INTEGER,right_rank,tag,MPI_COMM_WORLD);
-        } 
+        MPI_Irecv(&send_rank, 1,MPI_INTEGER,right_rank,tag,MPI_COMM_WORLD,&request);
+        MPI_Isend(&recv_rank, 1,MPI_INTEGER,left_rank,tag,MPI_COMM_WORLD,&request);
+        MPI_Wait(&request,MPI_STATUS_IGNORE);
+         
     //     update the send buffer
         send_rank = recv_rank;
     //     update the local sum
