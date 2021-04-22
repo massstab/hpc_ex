@@ -18,3 +18,10 @@ allocate: `salloc --account=uzh8 --partition=debug --constraint=mc --ntasks=36 -
 run: `srun -n 4 ring`
 
 I run the code and it just hanged. First I did it with the wrong send (the Send() not the Ssend()) function and it terminated and it was smart enough to output a deadlock error (first commit). Then I grouped the processes with a simple modulo operation to find even/odd ranks. It solves the problem because two neighbouring processes can then not both be in the receive state which blocks sending. Maybe it's not the best solution if you ask like this...
+In the file ring_nb.c is the non-blocking solution.
+
+# EX2 #
+No clue how to do that.
+
+# EX3 #
+No time left for this ex.
