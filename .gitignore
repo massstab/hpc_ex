@@ -1,0 +1,4 @@
+core.*
+*.o
+/users/dlinder/hpc_ex/exercise_session_07/poisson_MPI/core.18506
+/users/dlinder/hpc_ex/exercise_session_07/poisson_MPI/core.18263

@@ -1,0 +1,6 @@
+rhs_function=1
+nx=17
+ny=17
+foutput=1000
+nstep_max=10
+tolerance=1.0E-08
