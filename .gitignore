@@ -2,4 +2,4 @@ core.*
 *.o
 /users/dlinder/hpc_ex/exercise_session_07/poisson_MPI/core.18506
 /users/dlinder/hpc_ex/exercise_session_07/poisson_MPI/core.18263
-../exercise_session_06/ring_and_deadlocks/ring_nb_x1
+/exercise_session_06/ring_and_deadlocks/ring_nb_x1
