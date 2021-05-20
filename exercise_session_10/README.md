@@ -9,6 +9,7 @@ The output is everytime different. It takes longer every iteration. And the valu
 
 
 Ex2:
+
 I compiled the code with:
 `nvcc --gpu-architecture=sm_60 -o cpi_cuda cpi_cuda.cu gettime.c`
 Now I got the following output:
@@ -16,5 +17,6 @@ Now I got the following output:
 
 
 Ex3:
+
 I wrote a script `blocksandthreads.sh` where we can see that it takes ~15x longer when we go from NUM_BLOCK: 60, NUMTHREAD_THREAD: 16 to NUM_BLOCK: 600, NUMTHREAD_THREAD128. But i have to further investigate about the timing numbers. I did also a visualization with python in the file `visualize.py`
 The output files are labled `*.out`
