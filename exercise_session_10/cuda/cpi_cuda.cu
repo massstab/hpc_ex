@@ -4,8 +4,8 @@
 extern "C" double getTime(void);
 
 #define NBIN 1000000000  // Number of bins
-#define NUM_BLOCK  (2*56)  // Number of thread blocks
-#define NUM_THREAD  (2*8)  // Number of threads per block
+#define NUM_BLOCK  atoi(argv[1])  // Number of thread blocks
+#define NUM_THREAD atoi(argv[2])  // Number of threads per block
 
 // Kernel that executes on the CUDA device
 __global__ void cal_pi(double *sum, int nbin, double step, int nthreads, int nblocks) {
@@ -19,7 +19,8 @@ __global__ void cal_pi(double *sum, int nbin, double step, int nthreads, int nbl
 }
 
 // Main routine that executes on the host
-int main(void) {
+int main(int argc, char *argv[]) {
+	printf("NUM_BLOCK: %d NUMTHREAD_THREAD: %d, ", NUM_BLOCK, NUM_THREAD);
 	dim3 dimGrid(NUM_BLOCK,1,1);  // Grid dimensions
 	dim3 dimBlock(NUM_THREAD,1,1);  // Block dimensions
 	double *sumHost, *sumDev;  // Pointer to host & device arrays
@@ -43,8 +44,13 @@ int main(void) {
 	pi *= step;
 
 	// Print results
+	FILE *fp;
 	double delta = getTime() - start;
 	printf("PI = %.16g computed in %.4g seconds\n", pi, delta);
+	fp = fopen("timing_plot.out", "a");
+	fprintf(fp, "%d, %d, %.4g\n", NUM_BLOCK, NUM_THREAD, delta);
+
+
 	// Cleanup
 	free(sumHost);
 	cudaFree(sumDev);

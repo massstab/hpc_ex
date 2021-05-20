@@ -15,3 +15,6 @@ Now I got the following output:
 `PI = 3.14159265358979 computed in 0.08585 seconds`
 
 
+Ex3:
+I wrote a script `blocksandthreads.sh` where we can see that it takes ~15x longer when we go from NUM_BLOCK: 60, NUMTHREAD_THREAD: 16 to NUM_BLOCK: 600, NUMTHREAD_THREAD128. But i have to further investigate about the timing numbers. I did also a visualization with python in the file `visualize.py`
+The output files are labled `*.out`
