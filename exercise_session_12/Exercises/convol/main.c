@@ -7,10 +7,12 @@
 
 #define N 1000 		/* Size of square matrix */
 
-void gpu_convol (float *, float *, int);
+#define NUM_BLOCK  atoi(argv[1])
+
+void gpu_convol (float *, float *, int, int);
 
 /* (over-)Simple chronometer function */
-void chrono (int kind, float *time) {
+void  chrono (int kind, float *time) {
   static clock_t counts;
   if (kind == START) {
     *time = 0.0;
@@ -55,15 +57,18 @@ void cpu_convol (float *a, float *b, int n) {
   }
 }
 
-int main () {
+int main (int argc, char *argv[]) {
   float *a, *b, *c, time;
   int n = N;
+  int num_blocks = NUM_BLOCK;
   a = malloc (n*n*sizeof(float));
   b = malloc (n*n*sizeof(float));
   c = malloc (n*n*sizeof(float));
   init (a, n);
-  gpu_convol (a, c, n);
+  printf("Starting gpu_convol\n");
+  gpu_convol (a, c, n, num_blocks);
   chrono (START, &time);
+  printf("Starting cpu_convol\n");
   cpu_convol (a, b, n);
   chrono (STOP, &time);
   printf ("Convolution took  %f sec. on CPU\n", time);
